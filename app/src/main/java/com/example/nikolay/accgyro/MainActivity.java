@@ -19,10 +19,6 @@ public class MainActivity extends Activity implements SensorEventListener {
     private Sensor mAccelerometer;
     private Sensor mGyroscope;
 
-//    private float X;
-//    private float Z;
-//    private float zy;
-
     private TextView xGyroView;
     private TextView yGyroView;
     private TextView zGyroView;
@@ -45,20 +41,6 @@ public class MainActivity extends Activity implements SensorEventListener {
     private float [][][] tableFall;
 
 
-
-//    private File sdPathAcc;
-//    private File sdPathGyro;
-
-//    private File sdFileGyro;
-//    private File sdFileAcc;
-//    private BufferedWriter bwAcc;
-//    private BufferedWriter bwGyro;
-//    private int iAcc;
-//    private int iGyro;
-
-
-
-//    private long time0;
     private long timeStep;
     private long timeFall;
     private long timeAnalys;
@@ -68,12 +50,6 @@ public class MainActivity extends Activity implements SensorEventListener {
     private float[] averageGyro;
     private int accLenght;
     private int gyroLenght;
-//    private float amplX, amplY, amplZ;
-//    private float max, min;
-//    private int length;
-
-//    private float maxX, maX, maZ;
-//    private float minX, minY, minZ;
 
     private int steps;
     private int falls;
@@ -188,59 +164,6 @@ public class MainActivity extends Activity implements SensorEventListener {
         fallsPorog = tableFall[a[0]][a[1]][a[2]];
 
 
-
-        // find max amplitude from accelerometer axes
-//        while(d != null){
-//
-//            if (d.values[0] >= maxXAcc){
-//                maxXAcc = d.values[0];
-//            }
-//            if (d.values[0] <= minXAcc){
-//                minXAcc = d.values[0];
-//            }
-//
-//
-//            if (d.values[1] >= maXAcc){
-//                maXAcc = d.values[1];
-//            }
-//            if (d.values[1] <= minYAcc){
-//                minYAcc = d.values[1];
-//            }
-//
-//            if (d.values[2] >= maZAcc){
-//                maZAcc = d.values[2];
-//            }
-//            if (d.values[2] <= minZAcc){
-//                minZAcc = d.values[2];
-//            }
-//
-//            lengthAcc += 1;
-//            d = d.next;
-//        }
-//
-//        amplXAcc = maxXAcc - minXAcc;
-//        amplYAcc = maXAcc - minYAcc;
-//        amplZAcc = maZAcc - minZAcc;
-//
-//        if(amplXAcc > amplYAcc){
-//            if (amplXAcc > amplZAcc){
-//                ocbAcc = 0;
-//                amplAcc = amplXAcc;
-//            }else{
-//                ocbAcc = 2;
-//                amplAcc = amplZAcc;
-//            }
-//        }else{
-//            if(amplYAcc > amplZAcc){
-//                ocbAcc = 1;
-//                amplAcc = amplYAcc;
-//            }else{
-//                ocbAcc = 2;
-//                amplAcc = amplZAcc;
-//            }
-//        }
-
-
         //нахождение оси гироскопа с максимальной амплитудой
         d = firstGyro;
         //find max amplitude from gyroscope axes
@@ -290,19 +213,6 @@ public class MainActivity extends Activity implements SensorEventListener {
             }
         }
 
-//        boolean acc = true;
-//
-//        if (amplAcc > amplGyro){
-//            d = firstAcc;
-//            length = lengthAcc;
-//            ocb = ocbAcc;
-//        }else{
-//            d = firstGyro;
-//            length = lengthGyro;
-//            ocb = ocbGyro;
-//            acc = false;
-//        }
-
 
         //нахождение медианы выбранной оси гироскопа
         float buf[] = new float[gyroLenght];
@@ -325,11 +235,6 @@ public class MainActivity extends Activity implements SensorEventListener {
 
         medianaGyro = buf[gyroLenght/2];
 
-//        if (acc){
-//            d = firstAcc;
-//        }else{
-//            d = firstGyro;
-//        }
 
         d = firstGyro;
         boolean bf = true;
@@ -400,9 +305,6 @@ public class MainActivity extends Activity implements SensorEventListener {
             d = d.next;
         }
 
-//        if (!acc){
-//            ocb = ocb + 3;
-//        }
 
         stepMoments = tmpStepMoments;
         fallMoments = tmpFallMoments;
@@ -486,8 +388,6 @@ public class MainActivity extends Activity implements SensorEventListener {
         stepPorogView = (TextView) findViewById(R.id.stepPorog);
         fallPorogView = (TextView) findViewById(R.id.fallPorog);
         durAnalysView = (TextView) findViewById(R.id.durAnalys);
-//        iAcc = 0;
-//        iGyro = 0;
         float f[] = {0,0,0};
 
         firstAcc = new Dot(0, f);
@@ -510,29 +410,6 @@ public class MainActivity extends Activity implements SensorEventListener {
         accLenght = 1;
         gyroLenght = 1;
 
-//        minX = 1000;
-//        minY = 1000;
-//        minZ = 1000;
-//        maxX = -1000;
-//        maX = -1000;
-//        maZ = -1000;
-
-//        try {
-//
-//            File sdPath = android.os.Environment.getExternalStorageDirectory();
-//            sdPathGyro = new File(sdPath.getAbsolutePath() + "/" + "valuesX" + "/" + "gyro");
-//            sdPathAcc = new File(sdPath.getAbsolutePath() + "/" + "valuesX" + "/" + "acc");
-//            info.setText(String.valueOf(sdPath));
-//            bwAcc = null;
-//            bwGyro = null;
-//
-//            newFile("gyro");
-//            newFile("acc");
-//
-//        }catch(Exception e){
-//
-//        }
-
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(TYPE_ACCELEROMETER);
@@ -542,31 +419,6 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     }
 
-    
-    //create new file for acc or gyro values
-//    public void newFile(String name){
-//        try {
-//            if (name.equals("gyro")){
-//                sdFileGyro = new File(sdPathGyro, name + String.valueOf(iGyro) + ".txt");
-//                iGyro = iGyro + 1;
-//                if (bwGyro != null) {
-//                    bwGyro.close();
-//                }
-//                bwGyro = new BufferedWriter(new FileWriter(sdFileGyro, true));
-//            }
-//            if (name.equals("acc")){
-//                sdFileAcc = new File(sdPathAcc, name + String.valueOf(iAcc) + ".txt");
-//                iAcc = iAcc + 1;
-//                if (bwAcc != null) {
-//                    bwAcc.close();
-//                }
-//                bwAcc = new BufferedWriter(new FileWriter(sdFileAcc, true));
-//
-//            }
-//        }catch(Exception e){
-//
-//        }
-//    }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy){
@@ -584,44 +436,6 @@ public class MainActivity extends Activity implements SensorEventListener {
     protected void onPause() {
         super.onPause();
         mSensorManager.unregisterListener(this);
-//        try {
-//            bwAcc.close();
-//            bwGyro.close();
-//        }catch (Exception e){
-//
-//        }
-    }
-
-//    public File getFile(String name){
-//        if (name.equals("acc")){
-//            return sdFileAcc;
-//        }else{
-//            return sdFileGyro;
-//        }
-//    }
-
-//    public void writeFile(float[] values, long time, String name){
-//        try {
-//            File file = getFile(name);
-//
-//     //for max file size ~1MB
-//            while (file.length() > 1048701){
-//                newFile(name);
-//                file = getFile(name);
-//            }
-//
-//            BufferedWriter bw;
-//            if (name.equals("acc")){
-//                bw = bwAcc;
-//            }else{
-//                bw = bwGyro;
-//            }
-//            bw.write(time + ";" + String.valueOf(values[0]) + ";" + String.valueOf(values[1]) + ";" + String.valueOf(values[2]) + ";" + "\n");
-//            bw.flush();
-//        }catch(IOException e){
-//
-//        }
-//    }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
@@ -650,8 +464,6 @@ public class MainActivity extends Activity implements SensorEventListener {
                 firstAverageGyro = firstAverageGyro.next;
             }
 
-
-//            writeFile(event.values, event.timestamp, "gyro");
         }
 
         if (type == Sensor.TYPE_ACCELEROMETER) {
@@ -660,15 +472,6 @@ public class MainActivity extends Activity implements SensorEventListener {
             xAccView.setText(String.valueOf(event.values[0]));
             yAccView.setText(String.valueOf(event.values[1]));
             zAccView.setText(String.valueOf(event.values[2]));
-
-//            queue.offer(new Dot(event.timestamp, event.values[0], event.values[1], event.values[2]));
-//            if (queue.peek().time - event.timestamp < 200000000){
-//                queue.poll();
-//            }
-//            if (event.timestamp - timeAnalys > 100000000){
-//                analys();
-//                timeAnalys = event.timestamp;
-//            }
 
             Dot d = new Dot(time, event.values);
             lastAcc.next = d;
@@ -683,8 +486,6 @@ public class MainActivity extends Activity implements SensorEventListener {
                 firstAverageAcc = firstAverageAcc.next;
             }
 
-
-//            writeFile(event.values, event.timestamp, "acc");
 
         }
 
